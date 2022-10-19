@@ -21,6 +21,7 @@ const getStringDate = (date) => {
   }
 
   return `${year}-${month}-${day}`;
+  // return date.toISOString().slice(0, 10);
 };
 
 const emotionList = [
@@ -53,6 +54,7 @@ const emotionList = [
 
 const DiaryEditor = () => {
   const { onCreate } = useContext(DiaryDispatchContext);
+
   const [date, setDate] = useState(getStringDate(new Date()));
   const [emotion, setEmotion] = useState(3);
   const [content, setContent] = useState("");
@@ -72,7 +74,7 @@ const DiaryEditor = () => {
     }
 
     onCreate(date, content, emotion);
-    // navigate("/", { replace: true });
+    navigate("/");
   };
 
   return (

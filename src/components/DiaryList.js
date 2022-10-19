@@ -33,6 +33,7 @@ const ControlMenu = React.memo(({ value, onChange, optionList }) => {
 
 const DiaryList = ({ diaryList }) => {
   const navigate = useNavigate();
+  // console.log(diaryList);
 
   // 일기 정렬 State
   const [sortType, setSortType] = useState("latest");
@@ -55,7 +56,7 @@ const DiaryList = ({ diaryList }) => {
       if (filter === "good") {
         return +item.emotion <= 3;
       } else {
-        return item.emotion > 3;
+        return +item.emotion > 3;
       }
     };
 
@@ -66,7 +67,7 @@ const DiaryList = ({ diaryList }) => {
       filter === "all" ? copyList : copyList.filter((it) => filterCallBack(it));
 
     const sortedList = filteredList.sort(compare);
-
+    console.log(sortedList);
     return sortedList;
   };
 

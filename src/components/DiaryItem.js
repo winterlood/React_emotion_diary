@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import Button from "./Button";
 
 const DiaryItem = ({ id, content, emotion, date }) => {
-  console.log(content);
   const navigate = useNavigate();
 
   const strDate = new Date(+date).toLocaleDateString();
@@ -15,6 +14,7 @@ const DiaryItem = ({ id, content, emotion, date }) => {
   const editNavigate = () => {
     navigate(`/edit/${id}`);
   };
+  console.log(content);
 
   return (
     <div className="DiaryItem">
@@ -39,5 +39,9 @@ const DiaryItem = ({ id, content, emotion, date }) => {
     </div>
   );
 };
+
+// DiaryItem.defaultProps = {
+//   content: "",
+// };
 
 export default DiaryItem;

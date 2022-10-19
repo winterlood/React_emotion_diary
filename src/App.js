@@ -14,11 +14,14 @@ const dataReducer = (state, action) => {
       return action.data;
     }
     case "CREATE": {
-      newState = [...action.data, ...state];
+      const newItem = {
+        ...action.data,
+      };
+      newState = [newItem, ...state];
       break;
     }
     case "REMOVE": {
-      newState = state.filter((it) => it.id !== action.id);
+      newState = state.filter((it) => it.id !== action.targetId);
       break;
     }
     case "EDIT": {
@@ -30,6 +33,7 @@ const dataReducer = (state, action) => {
     default:
       return state;
   }
+
   return newState;
 };
 
@@ -49,8 +53,6 @@ const dummy_data = [
     content: "오늘의 일기2",
     date: 1665921024084,
   },
-  // asdasd
-  // adasdasda
   {
     id: 3,
     emotion: 3,
@@ -103,6 +105,7 @@ function App() {
       data: { id, date: new Date(date).getTime(), content, emotion },
     });
   }, []);
+  console.log(data);
 
   return (
     <DiaryStateContext.Provider value={data}>

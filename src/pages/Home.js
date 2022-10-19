@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { DiaryStateContext } from "../App";
 import Button from "../components/Button";
 import DiaryList from "../components/DiaryList";
+
 import Header from "../components/Header";
 
 const Home = () => {
@@ -9,6 +10,7 @@ const Home = () => {
 
   // 일기 데이터를 날짜에 따라 가공 1
   const [data, setData] = useState(diaryListCtx);
+  console.log(data);
 
   const [curDate, setCurDate] = useState(new Date());
 
@@ -28,7 +30,10 @@ const Home = () => {
       const lastDay = new Date(
         curDate.getFullYear(),
         curDate.getMonth() + 1,
-        0
+        0,
+        23,
+        59,
+        59
       ).getTime();
 
       setData(
