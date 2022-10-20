@@ -1,6 +1,6 @@
 import React, { useContext, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { DiaryDispatchContext } from "../App";
+import DiaryDispatchContext from "../store/diaryDispatchContext";
 
 import Button from "./Button";
 import EmotionItem from "./EmotionItem";

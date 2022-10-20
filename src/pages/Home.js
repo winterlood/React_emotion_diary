@@ -1,15 +1,17 @@
 import React, { useContext, useEffect, useState } from "react";
-import { DiaryStateContext } from "../App";
+
+import DiaryDispatchContext from "../store/diaryDispatchContext";
 import Button from "../components/Button";
 import DiaryList from "../components/DiaryList";
 
 import Header from "../components/Header";
 
 const Home = () => {
-  const diaryListCtx = useContext(DiaryStateContext);
+  const diaryDispatchCtx = useContext(DiaryDispatchContext);
+  console.log(diaryDispatchCtx.data);
 
   // 일기 데이터를 날짜에 따라 가공 1
-  const [data, setData] = useState(diaryListCtx);
+  const [data, setData] = useState(diaryDispatchCtx.data);
   console.log(data);
 
   const [curDate, setCurDate] = useState(new Date());
@@ -18,7 +20,7 @@ const Home = () => {
 
   // 일기 데이터를 날짜에 따라 가공 2
   useEffect(() => {
-    if (diaryListCtx.length > 1) {
+    if (diaryDispatchCtx.data.length > 1) {
       // curDate State의 월에 해당하는 1일을 ms로 변환
       const firstDay = new Date(
         curDate.getFullYear(),
@@ -37,10 +39,14 @@ const Home = () => {
       ).getTime();
 
       setData(
-        diaryListCtx.filter((it) => firstDay <= it.date && it.date <= lastDay)
+        diaryDispatchCtx.data.filter(
+          (it) => firstDay <= it.date && it.date <= lastDay
+        )
       );
     }
-  }, [diaryListCtx, curDate]);
+  }, [diaryDispatchCtx, curDate]);
+
+  console.log(diaryDispatchCtx.data);
 
   // 월 증가 함수
   const increaseMonth = () => {
