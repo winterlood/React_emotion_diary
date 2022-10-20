@@ -67,7 +67,7 @@ const dataReducer = (state, action) => {
 const DiaryDispatchProvider = (props) => {
   const [data, dispatchData] = useReducer(dataReducer, [...dummy_data]);
 
-  const dataId = useRef(0);
+  const dataId = useRef(6);
 
   // CREATE
   const onCreate = useCallback((date, content, emotion) => {
@@ -91,10 +91,10 @@ const DiaryDispatchProvider = (props) => {
   // EDIT
   const onEdit = useCallback((id, date, content, emotion) => {
     dispatchData({
-      tyep: "EDIT",
-      id,
+      type: "EDIT",
       data: { id, date: new Date(date).getTime(), content, emotion },
     });
+    console.log(emotion);
   }, []);
 
   const dispatchContext = {

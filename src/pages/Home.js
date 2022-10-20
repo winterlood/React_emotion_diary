@@ -8,11 +8,9 @@ import Header from "../components/Header";
 
 const Home = () => {
   const diaryDispatchCtx = useContext(DiaryDispatchContext);
-  console.log(diaryDispatchCtx.data);
 
   // 일기 데이터를 날짜에 따라 가공 1
   const [data, setData] = useState(diaryDispatchCtx.data);
-  console.log(data);
 
   const [curDate, setCurDate] = useState(new Date());
 
@@ -20,7 +18,7 @@ const Home = () => {
 
   // 일기 데이터를 날짜에 따라 가공 2
   useEffect(() => {
-    if (diaryDispatchCtx.data.length > 1) {
+    if (diaryDispatchCtx.data.length >= 1) {
       // curDate State의 월에 해당하는 1일을 ms로 변환
       const firstDay = new Date(
         curDate.getFullYear(),
@@ -44,9 +42,7 @@ const Home = () => {
         )
       );
     }
-  }, [diaryDispatchCtx, curDate]);
-
-  console.log(diaryDispatchCtx.data);
+  }, [diaryDispatchCtx.data, curDate]);
 
   // 월 증가 함수
   const increaseMonth = () => {

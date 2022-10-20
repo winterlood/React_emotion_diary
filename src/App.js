@@ -19,6 +19,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/new" element={<New />} />
             <Route path="/edit/:id" element={<Edit />} />
+
             {/* path variable 처리 : useParams 사용 */}
             <Route path="/diary/:id" element={<Diary />} />
           </Routes>

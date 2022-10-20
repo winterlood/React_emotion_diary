@@ -1,5 +1,7 @@
-import React from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import DiaryEditor from "../components/DiaryEditor";
+import DiaryDispatchContext from "../store/diaryDispatchContext";
 
 // useSearchParams를 사용하여 쿼리스트링 처리
 // 반환 받는 searchParams는 get을 통해 전달받는 쿼리 스트링을 꺼내 사용이 가능
@@ -9,32 +11,29 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 // 예를 들어 로그인을 하지 않은 사용자가 무언가 클릭했을 때 강제로 로그인 화면으로 전환
 
 const Edit = () => {
+  const [originData, setOriginData] = useState();
+  const { data } = useContext(DiaryDispatchContext);
   const navigate = useNavigate();
-  const [searchParams, setSearchParams] = useSearchParams();
 
-  const id = searchParams.get("id");
-  const mode = searchParams.get("mode");
-  console.log(id);
-  console.log(mode);
+  const { id } = useParams();
+  console.log(data);
+
+  useEffect(() => {
+    if (data.length >= 1) {
+      const targetDiary = data.find((it) => +it.id === +id);
+
+      if (targetDiary) {
+        setOriginData(targetDiary);
+      } else {
+        // 두 번째 인수 { replace: true } 뒤로가기 금지 옵션
+        navigate("/", { replace: true });
+      }
+    }
+  }, [id, data]);
+
   return (
     <div>
-      <h1>Edit</h1>
-      <p>이 곳은 일기 수정 페이지입니다.</p>
-      <button onClick={() => setSearchParams({ who: "LSH" })}>QS 바꾸기</button>
-      <button
-        onClick={() => {
-          navigate("/");
-        }}
-      >
-        HOME으로 가기
-      </button>
-      <button
-        onClick={() => {
-          navigate(-1);
-        }}
-      >
-        뒤로가기
-      </button>
+      {originData && <DiaryEditor isEdit={true} originData={originData} />}
     </div>
   );
 };

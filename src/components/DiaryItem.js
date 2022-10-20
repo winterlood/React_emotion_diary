@@ -14,7 +14,6 @@ const DiaryItem = ({ id, content, emotion, date }) => {
   const editNavigate = () => {
     navigate(`/edit/${id}`);
   };
-  console.log(content);
 
   return (
     <div className="DiaryItem">
